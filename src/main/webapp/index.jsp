@@ -147,6 +147,22 @@
             margin-bottom: 10px;
         }
 
+        /* Add to Cart Button */
+        .add-to-cart {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            background-color: #0056b3;
+        }
+
         footer {
             background-color: #fff;
             border-top: 1px solid #ddd;
@@ -208,13 +224,22 @@
 <div class="grid-container">
     <c:forEach var="perfume" items="${perfumes.rows}">
         <div class="grid-item">
-            <!-- You can replace this with real product images if available -->
             <img src="/image?id=${perfume.perfume_id}" alt="${perfume.name}" />
             <p><strong>${perfume.name}</strong></p>
             <p>${perfume.description}</p>
             <p><strong>Price: $${perfume.price}</strong></p>
             <p><em>Category: ${perfume.category_name}</em></p>
             <p><em>Stock: ${perfume.stock_quantity}</em></p>
+
+            <!-- Add to Cart Button -->
+            <form action="AddCartServlet" method="post">
+
+                <input type="hidden" name="perfume_id" value="${perfume.perfume_id}">
+                <input type="hidden" name="name" value="${perfume.name}">
+                <input type="hidden" name="price" value="${perfume.price}">
+                <input type="hidden" name="quantity" value="${perfume.stock_quantity}">
+                <button type="submit" class="add-to-cart">Add to Cart</button>
+            </form>
         </div>
     </c:forEach>
 </div>
